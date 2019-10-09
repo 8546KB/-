@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>0930</title>
+<pre>
+<script type="text/javascript">
+var i,j,sum;
+var ch=["得","一","二","三","四","五","六","七","八","九"];
+for(i=1;i<=9;i++)
+	{
+		
+		for(j=1;j<=i;j++)
+			{
+			sum=i*j;
+		 	if(sum<10)				
+					
+						document.write(ch[j]+ch[i]+ch[0]+ch[sum]+"  "+"\t");			
+			else
+				{
+					if(sum%10==0)
+						document.write(ch[j]+ch[i]+ch[Math.floor(sum/10)]+"十"+"  "+"\t");
+					else
+						document.write(ch[j]+ch[i]+ch[Math.floor(sum/10)]+"十"+ch[sum%10]+"\t");		
+				}
+		
+			}
+		
+		document.writeln("<br>");		
+	}
+</script>
+</pre>
+</head>
+<body>
+</body>
+</html>
