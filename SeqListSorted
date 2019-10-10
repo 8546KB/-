@@ -1,0 +1,138 @@
+import java.util.Scanner;
+class  SeqList
+{  
+	final int max=100;
+	int a[]=new int[max];	//数组加表长
+	int len;
+	void append()				//数据的插入
+	{
+		int i=0;
+		int x;
+		System.out.println("please a few numbers ,ending with -1");
+		Scanner sc =new Scanner(System.in);
+		x=sc.nextInt();
+		while(x!=-1)
+		{
+			a[i]=x;
+			i++;	
+			x=sc.nextInt();
+					
+		}
+		len=i;
+
+	}
+	boolean insert (int pox,int x)
+	{	
+		int i;
+		if(pox>len || pox<0)
+			return false;
+		else
+			{	
+			for(i=len-1;i>=pox;i--)
+				a[i+1]=a[i];
+			a[pox+1]=x;
+			len++;
+			return true;
+			}
+	}
+	void delall(int x)			//删除所有大于X的数据
+	{
+		int i,j;
+		for(i=0,j=0;i<len;i++)
+			if(a[j]<=x)
+			{
+				a[j]=a[i];
+				j++;
+			}
+		len=j;
+
+	}
+	void show()					//打印
+	{
+		int i;
+		for(i=0;i<len;i++)
+			System.out.print(a[i]+" ");
+			System.out.println();
+
+	}
+	SeqList merge(SeqList L1)	//合并顺序表
+	{
+		int i,j,k;
+		SeqList L=new SeqList();
+		for(i=0,j=0,k=0;i<L1.len&&j<this.len;)	
+		if(L1.a[i]<this.a[j])
+		{
+			L.a[k]=L1.a[i];
+			i++;
+			k++;
+		}
+		else
+		{
+			L.a[k]=a[j];
+			j++;
+			k++;
+		}
+		while(i<L1.len)
+		{
+			L.a[k]=L1.a[i];
+			i++;
+			k++;
+		}
+		while(i<this.len)
+		{
+			L.a[k]=this.a[j];
+			j++;
+			k++;
+		}
+		L.len=k;
+		return L;
+	}
+	SeqList merge_(SeqList L,SeqList Q)
+	{
+		int i,j,k;
+		SeqList P=new SeqList();
+		for(i=0,j=0,k=0;i<L.len&&j<Q.len;)
+			if(L.a[i]<Q.a[j])
+			{
+				P.a[k]=L.a[i];
+				i++;
+				k++;
+
+			}
+			else
+			{
+				P.a[k]=Q.a[j];
+				j++;
+				k++;
+			}
+			while(i<L.len)
+			{
+				P.a[k]=L.a[i];
+				i++;
+				k++;
+			}
+			while(j<Q.len)
+			{
+				P.a[k]=Q.a[j];
+				j++;
+				k++;
+			}
+			P.len=k;
+			return P;
+	}
+}
+class App
+{ 
+   public static void  main(String [] args)
+	{		
+		SeqList L=new SeqList();
+		SeqList Q=new SeqList();
+		SeqList T=new SeqList();
+		L.append();
+		L.show();
+		Q.append();
+		Q.show();
+		T = T.merge_(L,Q);
+		T.show();
+	}
+}
